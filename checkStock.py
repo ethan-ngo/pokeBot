@@ -66,10 +66,13 @@ def addFromPage(tcin, email, password):
     )))
     sign_in_button.click()
 
-    # Step 4: Enter email
     email_input = wait.until(EC.visibility_of_element_located((By.ID, "username")))
     email_input.clear()
     email_input.send_keys(email)
+
+    login_button = wait.until(EC.element_to_be_clickable((By.ID, "login")))
+    if login_button:
+        login_button.click()
 
     password_input = wait.until(EC.visibility_of_element_located((By.ID, "password")))
     password_input.clear()
@@ -78,6 +81,7 @@ def addFromPage(tcin, email, password):
     login_button = wait.until(EC.visibility_of_element_located((By.ID, "login")))
     login_button.click()
 
+    time.sleep(20)
     # placeOrder_button = wait.until(EC.element_to_be_clickable((
     # By.CSS_SELECTOR,
     # "styles_ndsBaseButton__W8Gl7 styles_md__X_r95 styles_mdGap__9J0yq styles_fullWidth__3XX6f styles_ndsButton__XOOOH styles_md__Yc3tr styles_filleddefault__7QnWt"
