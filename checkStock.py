@@ -44,7 +44,7 @@ def get_in_stock_tcins():
 def addFromPage(tcin, email, password):
     options = Options()
     options.add_argument("--headless")
-    driver = webdriver.Chrome()
+    driver = webdriver.Chrome(options=options)
     wait = WebDriverWait(driver, 7)
     driver.get("https://www.target.com/p/-/A-" + tcin)
 
