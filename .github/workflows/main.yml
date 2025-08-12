@@ -1,0 +1,31 @@
+name: Hourly Stock Check
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Every hour on the hour
+  workflow_dispatch:      # Optional: allows manual run from GitHub UI
+
+jobs:
+  check-stock:
+    runs-on: ubuntu-latest
+
+    env:
+      EMAIL: ${{ secrets.EMAIL }}
+      PASSWORD: ${{ secrets.PASSWORD }}
+      TOKEN: ${{ secrets.TOKEN }}
+      CHANNEL_ID: ${{ secrets.CHANNEL_ID }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run stock check
+        run: python check_and_add.py
