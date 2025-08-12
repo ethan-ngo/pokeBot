@@ -3,8 +3,7 @@ name: Hourly Stock Check
 on:
   schedule:
     - cron: '0 * * * *'  # Every hour on the hour
-  workflow_dispatch:      # Optional: allows manual run from GitHub UI
-
+    
 jobs:
   check-stock:
     runs-on: ubuntu-latest
