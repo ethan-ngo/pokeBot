@@ -35,9 +35,8 @@ def get_in_stock_tcins():
     data = r.json()
     in_stock = []
     for product in data.get("data", {}).get("product_summaries", []):
-        store_options = product.get("fulfillment", {}).get("scheduled_delivery", [])
-        shipping = store_options[0].get("ship_to_store", {})
-        if shipping.get("availability_status") == "AVAILABLE":
+        shipping = product.get("fulfillment", {}).get("scheduled_delivery", [])
+        if shipping.get("availability_status") != "UNAVAILABLE":
             item_title = product.get("item").get("product_description").get("title")
             in_stock.append((item_title, product["tcin"]))
     return in_stock
