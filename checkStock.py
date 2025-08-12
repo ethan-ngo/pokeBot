@@ -35,10 +35,11 @@ def get_in_stock_tcins():
     data = r.json()
     in_stock = []
     for product in data.get("data", {}).get("product_summaries", []):
-        store_options = product.get("fulfillment", {}).get("store_options", [])
+        store_options = product.get("fulfillment", {}).get("scheduled_delivery", [])
         shipping = store_options[0].get("ship_to_store", {})
         if shipping.get("availability_status") == "AVAILABLE":
-            in_stock.append(product["tcin"])
+            item_title = product.get("item").get("product_description").get("title")
+            in_stock.append((item_title, product["tcin"]))
     return in_stock
 
 def addFromPage(tcin, email, password):

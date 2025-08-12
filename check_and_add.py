@@ -10,8 +10,8 @@ def main():
     load_dotenv()
     email = os.getenv("EMAIL")
     password = os.getenv("PASSWORD")
-    for tcin in tcins:
-        print(f"In stock: {tcin}, adding to cart...")
+    for item_title, tcin in tcins:
+        print(f"In stock: {item_title}, adding to cart...")
         addFromPage(tcin, email, password)
 
 if __name__ == "__main__":
