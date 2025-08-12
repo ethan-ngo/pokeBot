@@ -37,7 +37,7 @@ def get_in_stock_tcins():
     for product in data.get("data", {}).get("product_summaries", []):
         store_options = product.get("fulfillment", {}).get("store_options", [])
         shipping = store_options[0].get("ship_to_store", {})
-        if shipping.get("availability_status") == "UNAVAILABLE":
+        if shipping.get("availability_status") == "AVAILABLE":
             in_stock.append(product["tcin"])
     return in_stock
 
